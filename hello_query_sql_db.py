@@ -13,7 +13,7 @@ def cli():
 @cli.command()
 @click.option(
     "--query",
-    default="SELECT * FROM world_population_csv LIMIT 2",
+    default="SELECT Country, 2022_Population FROM world_population_csv ORDER BY 2022_Population DESC LIMIT 3",
     help="SQL query to execute",
 )
 def cli_query(query):
