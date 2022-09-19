@@ -1,63 +1,41 @@
-# assimilate-databricks
-A repo to assimilate databricks
+# Project 1
 
-## API Getting Started
+## Overview
+Write a Big Data Script that uses the Pandas API for Spark or Dask
 
-![databricks-api](https://user-images.githubusercontent.com/58792/189719737-fcdaf61f-93d2-415b-8eea-ebb96143187d.png)
-
-
-
-## Setup auth
-
-[databricks-python](https://docs.microsoft.com/en-us/azure/databricks/dev-tools/python-api)
-
-Place in Codespace secrets
-* [unix, linux, mac](https://docs.microsoft.com/en-us/azure/databricks/dev-tools/python-api#unixlinuxandmacos)
-
+## Setup
+Use make to install required packages listed in ```requirements.txt```.
 ```bash
-DATABRICKS_HOST
-DATABRICKS_TOKEN
+make
+```
+## Microsoft Azure and Databricks
+The Databricks service is hold on Microsoft Azure.
+
+These four secrests need to be set up to connect with Databricks.
+```DATABRICKS_HOST```
+```DATABRICKS_HTTP_PATH```
+```DATABRICKS_SERVER_HOSTNAME```
+```DATABRICKS_TOKEN```
+
+
+## Test Databricks Connection
+To test the connection to Databricks, run the command below. If success, the cluster information will be printed.
+```
+databricks clusters list --output JSON
 ```
 
+## Build CLI with Click
+Click is used to build a CLI interface .
+To execute default query:
+```
+python hello_query_sql_db.py cli-query
+```
 
-## Test out CLI
+## Hook up to FastAPI
+To access the service hooked up by FastAPI, run the following command.
 
 ```
-databricks clusters list --output JSON | jq
-databricks fs ls dbfs:/
-databricks jobs list --output JSON | jq
+python fastapi-app.py
 ```
-## Remote connect
 
-[databricks-connect](https://docs.databricks.com/dev-tools/databricks-connect.html)
-
-## Databricks SQL Connector
-
-[Setup table first!](https://docs.databricks.com/dbfs/databricks-datasets.html)
-
-[sql remote](https://docs.databricks.com/dev-tools/python-sql-connector.html)
-https://docs.databricks.com/integrations/bi/jdbc-odbc-bi.html#connection-details-cluster
-
-
-## Comparing to Dask
-
-An alternative solution to Databricks is https://tutorial.dask.org/00_overview.html[Dask] or [Ray](https://docs.ray.io/en/latest/data/dask-on-ray.html).
-
-### Distributed compute
-
-* [Quickstart distributed compute example](https://distributed.dask.org/en/stable/quickstart.html)
-* [For Advanced users (HDFS wordcount Enron)](https://distributed.dask.org/en/stable/examples/word-count.html)
-
-### Hands on Enron
-
-* [Download data](https://www.kaggle.com/datasets/wcukierski/enron-email-dataset) from Kaggle and upload by right-click on explorer in GitHub Codespaces
-* place in a "datasets" directory and add this directory to your `.gitignore`.  This ensures you don't check in a 1GB file to GitHub.
-
-### Streamlit Example
-
-Enable enron...
-
-`streamlit hello --server.enableCORS=false`
-`streamlit run hello_streamlit_enron.py --server.enableCORS=false`
-
-
+Add ```/query``` at the end of the url, the server will run default query and show the result.
